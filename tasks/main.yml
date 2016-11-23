@@ -1,0 +1,24 @@
+---
+# tasks file for ansible-rhelphp7
+
+- name: add latest epel-release 
+  yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm state=present update_cache=yes
+
+- name: add webtatic
+  yum: name=https://mirror.webtatic.com/yum/el7/webtatic-release.rpm state=present update_cache=yes
+
+- name: install PHP 7
+  package: name={{ item }} state=present update_cache=yes
+  with_items:
+    - php70w
+    - php70w-opcache
+    - php70w-odbc
+
+- name: install httpd
+  package: name=httpd state=present update_cache=yes
+
+- name: copy over index.php to /var/www/html
+  template: src=templates/index.php dest=/var/www/html/index.php
+  notify:
+     - restart httpd
+
