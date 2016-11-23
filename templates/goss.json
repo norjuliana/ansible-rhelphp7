@@ -1,0 +1,26 @@
+{
+	"file": {
+		"/etc/php.ini": {
+			"exists": true,
+			"mode": "0644",
+			"owner": "root",
+			"group": "root",
+			"filetype": "file",
+			"contains": []
+		}
+	},
+	"package": {
+		"httpd": {
+			"installed": true,
+			"versions": [
+				"2.4.6"
+			]
+		}
+	},
+	"service": {
+		"httpd": {
+			"enabled": true,
+			"running": true
+		}
+	}
+}
